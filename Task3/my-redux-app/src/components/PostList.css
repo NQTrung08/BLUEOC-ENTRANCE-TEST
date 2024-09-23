@@ -1,0 +1,31 @@
+/* src/components/PostList.css */
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.post-table th, .post-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.post-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.post-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.post-table tr:hover {
+  background-color: #ddd;
+}
+
+.post-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #9aad6b;
+  color: white;
+}

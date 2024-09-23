@@ -1,24 +1,50 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import PostList from './components/PostList';
+import PostForm from './components/PostForm';
+import { Button, Modal } from 'antd';
 
 function App() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Provider store={store}>
+      <div>
+        {/* Nút Add Post */}
+        <Button type="primary" onClick={showModal} style={{
+          marginBottom: 10,
+          marginLeft: 10,
+          marginTop: 20,
+          float: 'right'
+        }}>
+          Add Post
+        </Button>
+
+        {/* Modal chứa PostForm */}
+        <Modal
+          title="Add New Post"
+          visible={isModalVisible}
+          footer={null}
+          onCancel={handleCancel}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <PostForm onClose={handleCancel} />
+        </Modal>
+
+        {/* Danh sách Post */}
+        <PostList />
+      </div>
+    </Provider>
   );
 }
 
