@@ -13,6 +13,16 @@ export const addPost = createAsyncThunk('posts/addPost', async (newPost) => {
   return response.data;
 });
 
+export const updatePost = createAsyncThunk('posts/updatePost', async (post) => {
+  const response = await axios.put(`https://jsonplaceholder.typicode.com/posts/${post.id}`, post);
+  return response.data;
+});
+
+export const deletePost = createAsyncThunk('posts/deletePost', async (id) => {
+  await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  return id;
+});
+
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -21,9 +31,7 @@ const postsSlice = createSlice({
     status: 'idle',  // idle | loading | succeeded | failed
     error: null,
   },
-  reducers: {
-    // Nếu cần thêm các reducer khác
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -39,7 +47,20 @@ const postsSlice = createSlice({
       })
       .addCase(addPost.fulfilled, (state, action) => {
         state.posts.push(action.payload); // Thêm bài viết mới vào danh sách
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const index = state.posts.findIndex((post) => post.id === action.payload);
+        if (index!== -1) {
+          state.posts.splice(index, 1); // Xóa bài viết từ danh sách
+        }
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        const index = state.posts.findIndex((post) => post.id === action.payload.id);
+        if (index!== -1) {
+          state.posts[index] = action.payload; // Cập nhật bài viết trong danh sách
+        }
       });
+
   },
 });
 

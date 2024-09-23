@@ -1,12 +1,15 @@
 // src/components/PostList.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPosts } from '../features/post/postSlice';
+import { fetchPosts, updatePost, deletePost } from '../features/post/postSlice';
 import { Table, Button, Popconfirm, message } from 'antd';
+import UpdatePostModal from './UpdateForm'
 
 const PostList = () => {
   const dispatch = useDispatch();
   const { posts, status, error } = useSelector((state) => state.posts);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState(null);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -48,7 +51,7 @@ const PostList = () => {
       render: (_, record) => (
         <span style={{
           display: 'flex',
-          justifyContent:'center',
+          justifyContent: 'center',
         }}>
           <Button type="link" style={{
             backgroundColor: 'blue',
@@ -72,16 +75,27 @@ const PostList = () => {
   ];
 
   const handleEdit = (record) => {
-    // Xử lý logic sửa bài viết
-    message.info(`Edit post: ${record.title}`);
+    setCurrentPost(record);
+    setIsModalVisible(true);
   };
 
   const handleDelete = (id) => {
-    // Xử lý logic xóa bài viết
+    dispatch(deletePost(id));
     message.success(`Post with ID ${id} deleted!`);
-    // Bạn có thể thêm logic xóa từ API và cập nhật state
   };
 
+  const handleUpdate = (values) => {
+    dispatch(updatePost({ ...currentPost, ...values }));
+    setIsModalVisible(false);
+    message.success('Post updated successfully!');
+    setCurrentPost(null); // Reset currentPost sau khi cập nhật
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    setCurrentPost(null); // Reset currentPost khi đóng modal
+  };
+
+  console.log(currentPost)
   return (
     <div>
       <h2>Posts List</h2>
@@ -91,6 +105,13 @@ const PostList = () => {
         rowKey="id"
         bordered
         style={{ marginTop: 20 }}
+      />
+      <UpdatePostModal
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        onUpdate={handleUpdate}
+        currentPost={currentPost}
+        
       />
     </div>
   );
