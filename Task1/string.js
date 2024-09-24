@@ -16,7 +16,7 @@ const mostFrequentLengths = (array) => {
   lengths.forEach(length => {
     frequency[length] = (frequency[length] || 0) + 1;
   });
-  console.log(frequency);
+  // console.log(frequency);
 
   let maxCount = 0;
   let mostFrequentLengths = 0;
@@ -28,7 +28,7 @@ const mostFrequentLengths = (array) => {
     }
   }
 
-  console.log(mostFrequentLengths)
+  // console.log(mostFrequentLengths)
 
   const mostFrequentStrings = array.filter(str => str.length === parseInt(mostFrequentLengths));
   return mostFrequentStrings;
@@ -37,20 +37,44 @@ const mostFrequentLengths = (array) => {
 
 
 function testMostFrequentLengths() {
-  console.assert(JSON.stringify(mostFrequentLengths(['a', 'ab', 'abc', 'cd', 'def', 'gh'])) === JSON.stringify(['ab', 'cd', 'gh']), 'Test case 1 thất bại');
+  // Test case 1
+  if (JSON.stringify(mostFrequentLengths(['a', 'ab', 'abc', 'cd', 'def', 'gh'])) === JSON.stringify(['ab', 'cd', 'gh'])) {
+    console.log('Test case 1 passed');
+  } else {
+    console.log('Test case 1 failed');
+  }
 
-  console.assert(JSON.stringify(mostFrequentLengths(['one', 'two', 'six'])) === JSON.stringify(['one', 'two', 'six']), 'Test case 2 thất bại');
+  // Test case 2
+  if (JSON.stringify(mostFrequentLengths(['one', 'two', 'six'])) === JSON.stringify(['one', 'two', 'six'])) {
+    console.log('Test case 2 passed');
+  } else {
+    console.log('Test case 2 failed');
+  }
 
-  console.assert(JSON.stringify(mostFrequentLengths(['hello', 'hi', 'yo', 'sup', 'ok'])) === JSON.stringify(['hi', 'yo', 'ok']), 'Test case 3 thất bại');
+  // Test case 3
+  if (JSON.stringify(mostFrequentLengths(['hello', 'hi', 'yo', 'sup', 'ok'])) === JSON.stringify(['hi', 'yo', 'ok'])) {
+    console.log('Test case 3 passed');
+  } else {
+    console.log('Test case 3 failed');
+  }
 
-  console.assert(JSON.stringify(mostFrequentLengths(['single'])) === JSON.stringify(['single']), 'Test case 4 thất bại');
+  // Test case 4
+  if (JSON.stringify(mostFrequentLengths(['single'])) === JSON.stringify(['single'])) {
+    console.log('Test case 4 passed');
+  } else {
+    console.log('Test case 4 failed');
+  }
 
+  // Test case 5 (chấp nhận nhiều kết quả đúng)
   const result = JSON.stringify(mostFrequentLengths(['a', 'bb', 'ccc', 'ddd', 'e', 'ff']));
   const expected1 = JSON.stringify(['a', 'e']);
   const expected2 = JSON.stringify(['bb', 'ff']);
   const expected3 = JSON.stringify(['ccc', 'ddd']);
-  console.assert(result === expected1 || result === expected2 || result === expected3, 'Test case 5 thất bại');
-
+  if (result === expected1 || result === expected2 || result === expected3) {
+    console.log('Test case 5 passed');
+  } else {
+    console.log('Test case 5 failed');
+  }
 
 }
 

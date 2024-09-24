@@ -12,21 +12,46 @@
 const sumOfTopTwoIntegers = (array) => {
 
   array.sort((a, b) => b - a);
-  console.log(array);
+  // console.log(array);
   return array[0] + array[1];
 };
 
 
 const testSumOfTopTwoIntegers = () => {
-  console.assert(sumOfTopTwoIntegers([1, 4, 2, 3, 5]) === 9, 'Test case 1 thất bại');
+  // Test case 1
+  if (sumOfTopTwoIntegers([1, 4, 2, 3, 5]) === 9) {
+    console.log('Test case 1 passed');
+  } else {
+    console.log('Test case 1 failed');
+  }
 
-  console.assert(sumOfTopTwoIntegers([10, 20, 30, 40, 50]) === 90, 'Test case 2 thất bại');
+  // Test case 2
+  if (sumOfTopTwoIntegers([10, 20, 30, 40, 50]) === 90) {
+    console.log('Test case 2 passed');
+  } else {
+    console.log('Test case 2 failed');
+  }
 
-  console.assert(sumOfTopTwoIntegers([1, 2, 3, 4, 5]) === 9, 'Test case 3 thất bại');
+  // Test case 3
+  if (sumOfTopTwoIntegers([1, 2, 3, 4, 5]) === 9) {
+    console.log('Test case 3 passed');
+  } else {
+    console.log('Test case 3 failed');
+  }
 
-  console.assert(sumOfTopTwoIntegers([10, 9, 8, 7, 6]) === 19, 'Test case 4 thất bại');
+  // Test case 4
+  if (sumOfTopTwoIntegers([10, 9, 8, 7, 6]) === 19) {
+    console.log('Test case 4 passed');
+  } else {
+    console.log('Test case 4 failed');
+  }
 
-  console.assert(sumOfTopTwoIntegers([1, 1, 2, 2, 3, 3, 4]) === 7, 'Test case 5 thất bại');
+  // Test case 5
+  if (sumOfTopTwoIntegers([1, 1, 2, 2, 3, 3, 4]) === 7) {
+    console.log('Test case 5 passed');
+  } else {
+    console.log('Test case 5 failed');
+  }
 
 }
 

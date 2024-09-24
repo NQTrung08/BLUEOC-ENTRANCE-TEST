@@ -43,3 +43,5 @@
     ```bash
       npm start
     ```
+
+4. Project run: http://localhost:3000/
